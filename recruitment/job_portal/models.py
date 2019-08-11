@@ -28,3 +28,11 @@ class JobPost(models.Model):
                     break
                 slug = slugify(self.position + " " + str(time.time())[:6])
         super().save(*args, **kwargs)
+
+class Application(models.Model):
+    applied_for = models.ForeignKey(JobPost, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    experience = models.CharField(max_length=40)
+    skills = models.CharField(max_length=120)
+    resume = models.FileField(upload_to="resume/")
