@@ -30,9 +30,15 @@ class JobPost(models.Model):
         super().save(*args, **kwargs)
 
 class Application(models.Model):
+    APPLICATION_STATUS = (
+            ("rejected", "Rejected"), ("accepted", "Accepted"), 
+            ("pending", "Pending"),
+        )
+
     applied_for = models.ForeignKey(JobPost, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     experience = models.CharField(max_length=40)
     skills = models.CharField(max_length=120)
     resume = models.FileField(upload_to="resume/")
+    status = models.CharField(max_length=30, choices=APPLICATION_STATUS, default="pending")
