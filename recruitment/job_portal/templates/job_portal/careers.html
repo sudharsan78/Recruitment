@@ -1,18 +1,28 @@
-<!DOCTYPE html>
-{% load static %}
-<html>
-    <head>
-        <meta charset="utf-8">
-	<meta name="author" content="Sudharsan.V.S">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title></title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/vendors/bootstrap.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
-    </head>
-    <body>
+{% extends 'job_portal/base.html' %}
 
-	<script src="{% static 'js/vendors/jquery-3.4.1.min.js' %}"></script>
-	<script src="{% static 'js/vendors/bootstrap.min.js' %}"></script>
-        <script></script>
-    </body>
-</html>
+{% block body %}
+<div class="career_text_banner">
+  <div>
+    <h2>Current Openings</h2>
+  </div>
+</div>
+
+<div class="container overide_cont_padding">
+  {% for opportunity in current_openings %}
+  <div class="opportunity_box"> 
+    <div>
+      <h4>
+        <a style="color: unset;" href="{% url 'job_portal:job_post' opportunity.slug %}">{{opportunity.position}}</a>
+      </h4>
+    </div>
+    <div class="loc_date_data">{{opportunity.location}}, {{opportunity.country}}. Posted On: {{opportunity.posted_on}}</div>
+    <div>{{opportunity.job_description|truncatewords:35}}</div>
+    <div><button class="custom_button">Apply</button></div>
+  </div>
+  <div class="line"></div>
+  {% endfor %}
+</div>
+{% endblock body %}
+
+{% block script %}
+{% endblock script %}

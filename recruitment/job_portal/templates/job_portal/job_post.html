@@ -1,0 +1,28 @@
+{% extends 'job_portal/base.html' %}
+
+{% block body %}
+<div class="career_text_banner">
+  <div>
+    <h2>{{post.position}}</h2>
+    <p>{{post.location}}, {{post.country}}. Posted On: {{post.posted_on}}</p>
+  </div>
+</div>
+
+<div class="container overide_cont_padding">
+  <div class="row">
+    <div class="col">
+      <h5>Experience Required</h5>
+      {{post.experience}}
+      <h5>Primary Skill</h5>
+      {{post.primary_skill}}
+      <h5>Secondary Skill</h5>
+      {{post.secondary_skill}}
+      <h5>Job Desctiption</h5>
+      {{post.job_description}}
+    </div>
+    <div class="col-md-3" style="text-align: center;">
+      <div><button class="custom_button">Apply</button></div>
+    </div>
+  </div>
+</div>
+{% endblock body %}
