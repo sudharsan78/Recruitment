@@ -17,7 +17,7 @@ class JobPost(models.Model):
     slug = models.SlugField(unique=True, blank=True, editable=False)
 
     def __str__(self):
-        return self.position
+        return self.position + " " + self.experience
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -46,3 +46,6 @@ class Application(models.Model):
     skills = models.CharField(max_length=120)
     resume = models.FileField(upload_to="resume/")
     status = models.CharField(max_length=30, choices=APPLICATION_STATUS, default="pending")
+
+    def __str__(self):
+        return self.first_name + " " + self.experience
