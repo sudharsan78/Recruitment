@@ -2,6 +2,7 @@ import time
 
 from django.db import models
 from django.utils.text import slugify
+from django.core.validators import RegexValidator
 
 class JobPost(models.Model):
     position = models.CharField(max_length=50)
@@ -38,6 +39,9 @@ class Application(models.Model):
     applied_for = models.ForeignKey(JobPost, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    phone_regex = RegexValidator(regex=r'^[0-9]{10}$', message="enter a valid phone number.")
+    phone_number = models.CharField(max_length=10, validators=[phone_regex])
     experience = models.CharField(max_length=40)
     skills = models.CharField(max_length=120)
     resume = models.FileField(upload_to="resume/")
