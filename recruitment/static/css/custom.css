@@ -32,6 +32,11 @@
   color: #343a40;
 }
 
+.form_close_btn {
+  color: white; 
+  background-color: #a5a5a5e3;
+}
+
 .line {
   height: 1px;
   background-color: gray;

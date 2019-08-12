@@ -17,12 +17,38 @@
     </div>
     <div class="loc_date_data">{{opportunity.location}}, {{opportunity.country}}. Posted On: {{opportunity.posted_on}}</div>
     <div>{{opportunity.job_description|truncatewords:35}}</div>
-    <div><button class="custom_button">Apply</button></div>
   </div>
   <div class="line"></div>
   {% endfor %}
 </div>
+
+<div class="modal fade" id="message_model" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard=false>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+	<h5 class="modal-title">Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {% endblock body %}
 
 {% block script %}
+<script>
+  $(function () {
+    {% if messages %}
+      {% for message in messages %}
+	$("#message_model .modal-body").text("{{message}}");
+	$("#message_model").modal("show");
+      {% endfor %}
+    {% endif %}
+  });
+</script>
 {% endblock script %}

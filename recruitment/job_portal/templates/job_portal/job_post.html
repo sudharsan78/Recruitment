@@ -32,17 +32,76 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+	<h5 class="modal-title">{{post.position}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+	<form method="POST" id="id_app_form" action="{% url 'job_portal:apply' %}" enctype="multipart/form-data">
+	  {% csrf_token %}
+
+	  <div class="form-group row" style="display: none;">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Position</label>
+            <div class="col-sm-9">
+	      {{application_form.applied_for}}
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">First name</label>
+            <div class="col-sm-9">
+	      {{application_form.first_name}}
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Lase name</label>
+            <div class="col-sm-9">
+	      {{application_form.last_name}}
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+	      {{application_form.email}}
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Phone number</label>
+            <div class="col-sm-9">
+	      {{application_form.phone_number}}
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Experience</label>
+            <div class="col-sm-9">
+	      {{application_form.experience}}
+            </div>
+          </div>
+	  
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">skills</label>
+            <div class="col-sm-9">
+	      {{application_form.skills}}
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Resume</label>
+            <div class="col-sm-9">
+	      {{application_form.resume}}
+            </div>
+          </div>
+
+	  <div style="text-align: right;">
+	    <input class="custom_button form_close_btn" type="button" value="Close" data-dismiss="modal">
+	    <input class="custom_button" id="application_submit" type="submit" value="Submit">
+	  </div>
+	</form>
       </div>
     </div>
   </div>
@@ -50,4 +109,9 @@
 {% endblock body %}
 
 {% block script %}
+<script>
+  $(function () {
+    $("#id_applied_for").val("{{post.id}}");
+  });
+</script>
 {% endblock script %}
